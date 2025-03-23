@@ -56,4 +56,17 @@ public interface CourseRepository {
         """)
     @ResultMap("coure")
     Course updateCourse(@Param("courseId") Integer courseId , @Param("request") CouseRequest couseRequest );
+
+
+    @Select("""
+    SELECT c.* 
+    FROM courses c
+    JOIN student_course sc ON c.course_id = sc.course_id
+    WHERE sc.student_id = #{id} 
+    """)
+
+    @ResultMap("coure")
+    Course getCourseByStudentId(Integer id);
+
+
 }

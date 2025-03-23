@@ -34,17 +34,29 @@ public class StudentImp implements StudentService {
         return studentRepository.deleteStudent(id);
     }
 
-    @Override
-    public Student updateStudent(Integer id, StudentResquest studentResquest) {
-        return studentRepository.updateStudent(id,studentResquest);
-    }
 
     @Override
     public Student insertStudent(StudentResquest studentResquest) {
+
         Student student = studentRepository.insertStudent(studentResquest);
+        System.out.println(student);
+        for(Integer courseId :  studentResquest.getCourses()){
+            studentRepository.insertStudent_course(student.getStudentid(),courseId);
+        }
+
+
+        return studentRepository.getStusentByid(student.getStudentid());
+    }
+
+    @Override
+    public Student updateStudentByid(Integer stuId, StudentResquest studentResquest) {
+            studentRepository.deleteStudentIdAndCourseId(stuId);
+            studentRepository.updateStudent(stuId,studentResquest);
+            Student student= studentRepository.getStusentByid( stuId);
         for(Integer courseId :  studentResquest.getCourses()){
             studentRepository.insertStudent_course(student.getStudentid(),courseId);
         }
         return studentRepository.getStusentByid(student.getStudentid());
     }
+
 }

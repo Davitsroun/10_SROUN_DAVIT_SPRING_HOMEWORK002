@@ -14,6 +14,6 @@ import java.util.List;
 public class StudentResquest {
     private String student_name;
     private String email;
-    private int phone_number;
+    private String phone_number;
     private List<Integer> courses;
 }

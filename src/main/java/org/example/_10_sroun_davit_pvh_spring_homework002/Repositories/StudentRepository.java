@@ -20,7 +20,7 @@ public interface StudentRepository {
             @Result(property = "studentid", column = "student_id"),
             @Result(property = "courses",
                     column = "student_id",
-                    many = @Many(select = "org.example._10_sroun_davit_pvh_spring_homework002.Repositories.CourseRepository.getCourseById"))
+                    many = @Many(select = "org.example._10_sroun_davit_pvh_spring_homework002.Repositories.CourseRepository.getCourseByStudentId"))
     })
     ArrayList<Student> getall(Integer size, Integer page);
 
@@ -33,19 +33,27 @@ public interface StudentRepository {
 
 
     @Select("""
-            DELETE FROM students where id =#{id}
+            DELETE FROM students where student_id =#{id}
             """)
     Student deleteStudent(Integer id);
 
 
+//    @Select("""
+//            UPDATE studetns
+//            SET student_name =#{request.student_name},
+//                email =#{request.email},
+//                phone_number= #{request.phone_number},
+//                WHERE student_id = #{id}
+//            RETURNING*
+//            """)
+
     @Select("""
-            UPDATE studetns 
-            SET student_name =#{request.student_name},
-                email =#{request.email},
-                phone_number= #{request.phone_number},
-                WHERE id = #{id}   
-            RETURNING*
-            """)
+        UPDATE students set
+              student_name = #{request.student_name}
+             ,email = #{request.email}
+             ,phone_number = #{request.phone_number}
+        WHERE student_id = #{id}
+    """)
     @ResultMap("StudentCourse")
     Student updateStudent(Integer id, @Param("request") StudentResquest studentResquest);
 
@@ -60,13 +68,23 @@ public interface StudentRepository {
     @ResultMap("StudentCourse")
     Student insertStudent(@Param("request") StudentResquest studentResquest);
 
-
-
     @Select("""
         INSERT INTO student_course(student_id,course_id)
         values (#{studentId},#{courseId})
         """)
-      void insertStudent_course(Integer studentId, Integer courseId);
+    void insertStudent_course(Integer studentId, Integer courseId);
+
+
+
+
+//    deleted from middle table
+
+    @Select("""
+        DELETE FROM student_course
+        WHERE student_id = #{studentId}
+    """)
+    void deleteStudentIdAndCourseId(Integer studentId);
+
 
 
 

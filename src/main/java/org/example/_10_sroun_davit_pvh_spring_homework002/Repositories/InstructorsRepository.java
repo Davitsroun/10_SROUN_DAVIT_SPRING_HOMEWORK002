@@ -3,8 +3,7 @@ package org.example._10_sroun_davit_pvh_spring_homework002.Repositories;
 import org.apache.ibatis.annotations.*;
 import org.example._10_sroun_davit_pvh_spring_homework002.Model.dto.Instructore;
 import org.example._10_sroun_davit_pvh_spring_homework002.Model.entity.Resquest.InstructorRequest;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.support.WebContentGenerator;
+
 
 import java.util.ArrayList;
 

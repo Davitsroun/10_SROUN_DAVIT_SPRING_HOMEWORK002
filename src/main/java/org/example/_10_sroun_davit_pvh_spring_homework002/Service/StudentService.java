@@ -13,7 +13,10 @@ public interface StudentService {
 
     Student deleteStudent(Integer id);
 
-    Student updateStudent(Integer id, StudentResquest studentResquest);
+
 
     Student insertStudent (StudentResquest studentResquest);
+
+    Student updateStudentByid(Integer integer,StudentResquest studentResquest);
+
 }

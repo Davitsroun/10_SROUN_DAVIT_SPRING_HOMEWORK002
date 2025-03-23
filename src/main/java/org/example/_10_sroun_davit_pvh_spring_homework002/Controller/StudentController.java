@@ -69,7 +69,7 @@ public class StudentController {
         StudentApiResponse studentApiRespons= StudentApiResponse.<Student>builder()
                 .message("Update  Student by id Successfully")
                 .status(HttpStatus.OK)
-                .payload(studentService.updateStudent(id,studentResquest))
+                .payload(studentService.updateStudentByid(id,studentResquest))
                 .timestamp(LocalDateTime.now())
                 .build();
         return  ResponseEntity.status(201).body(studentApiRespons);
@@ -87,6 +87,7 @@ public class StudentController {
                 .build();
         return  ResponseEntity.status(201).body(studentApiRespons);
     }
+
 
 
 }
